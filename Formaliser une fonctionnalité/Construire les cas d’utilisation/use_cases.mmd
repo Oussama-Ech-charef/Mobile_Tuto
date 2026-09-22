@@ -1,0 +1,41 @@
+usecase-beta
+
+direction LR
+
+actor admin("Admine")
+
+actor auteur("Auteur")
+
+actor visiteur("Visiteur")
+
+  category("Consulter les catégories")
+  ajouter("Ajouter une catégorie")
+  modifier("Modifier une catégorie")
+  supprimer("Supprimer une catégorie")
+  creer("Créer un auteur")
+  valider("Valider un article")
+  publier("Publier un article")
+  
+  ajoutr_a("Ajouter un article")
+  modifier_a("Modifier un article non publié")
+  supprimer_a("Supprimer un article non publié")
+  changer_a("Changer son profil")
+  reinitialiser_a("Réinitialiser son mot de passe")
+  
+  consulter_v("Consulter les articles")
+
+admin --- category
+admin --- ajouter 
+admin --- modifier
+admin --- supprimer
+admin --- creer
+admin --- valider
+admin --- publier
+
+auteur --- ajoutr_a
+auteur --- modifier_a
+auteur --- supprimer_a
+auteur --- changer_a
+auteur --- reinitialiser_a
+
+visiteur --- consulter_v
