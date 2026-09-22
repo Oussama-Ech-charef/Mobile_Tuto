@@ -1,0 +1,15 @@
+sequenceDiagram
+    actor Auteur
+    participant Système
+
+    Auteur->>Système: Accède à la création d'article
+    Système-->>Auteur: Affiche le formulaire de rédaction
+    Auteur->>Système: Remplit le formulaire et clique sur Enregistrer
+
+    alt Contenu vide (Erreur)
+        Système-->>Auteur: Refuse et affiche "Le contenu est obligatoire"
+    else Statut Brouillon (Alternatif)
+        Système-->>Auteur: Sauvegarde en inactif et redirige vers la liste
+    else Cas nominal
+        Système-->>Auteur: Sauvegarde l'article et redirige vers la liste
+    end
