@@ -1,0 +1,23 @@
+interface,Name,signification,Type,Obligatoire,calcule
+user,nom,Nom d'auteur,VARCHAR,oui,non
+user,prenom,prenom  d'auteur,VARCHAR,oui,non
+user,nom complete,Nom et prenom  d'auteur,VARCHAR,X,oui
+X,date d'inscreption,date d'inscreption d'auteur,DATETIME,oui,non
+user,email,Adresse email de l'auteur,VARCHAR,oui,non
+user,mot_de_passe,Mot de passe de l'auteur,VARCHAR,oui,non
+user,photo_profil,Photo de profil de l'auteur,VARCHAR ,non,non
+article,id_article,id article,INT,oui,non
+article,titre,Titre de l'article,VARCHAR,oui,non
+article,contenu,Contenu complet de l'article,TEXT,oui,non
+article ,id_article_precedent ,id article précédent,INT,X,oui
+article ,id_article_suivant,id article suivant,INT,X,oui
+article ,nombre de vue,nombre de vue,INT,oui,non
+X,nombre de vue totale,nombre de vue totale,INT,X,oui
+article,image_article,Image principale de l'article,VARCHAR ,non,non
+article,statut_article,État de l'article (Brouillon ou Publié),ENUM,oui,non
+article,date_creation,Date de création de l'article,DATETIME,oui,non
+article,date_publication,date de publication de l'article,DATETIME,non,non
+article,temps_lecture_estime,Durée estimée nécessaire pour lire l'article,INT,X,oui
+category,nom_categorie,Nom de la catégorie,VARCHAR,oui,non
+category,couleur,Couleur associée à la catégorie,VARCHAR,oui,non
+category,icone,Icône associée à la catégorie,VARCHAR,oui,non
