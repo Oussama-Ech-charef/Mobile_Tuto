@@ -1,8 +1,0 @@
-Interface,numero_commande,Signification,Format,Obligatoire,Calculée
-Commande,numero_commande,Identifiant unique du Commande,Entier,Oui,Non
-Commande,quantite_commande,la quantite du commande,Entier,Oui,Non
-Commande,date_commande,date du commande,JJ/MM/AAAA,Oui,Non
-Client,nom_client,Nom du clien,Texte,Oui,Non
-Client,email_client,Email du client,Texte,Oui,Non
-Produit,nom_produit,Nom du produit,Texte,Oui,Non
-Produit,prix_produit,prix du produit,"Decimal(10,2)",Oui,Non
