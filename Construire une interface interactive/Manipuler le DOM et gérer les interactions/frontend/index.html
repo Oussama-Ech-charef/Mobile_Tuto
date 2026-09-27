@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+
+    <button id="btn-show-form">Nouvelle categorie</button>
+    
+    <div id="section-form" hidden>
+
+        <form  id="form-categorie">
+
+            <input type="text" id="cat-nom" placeholder="Nom de la categorie" required>
+
+            <input type="color"  id="cat-couleur" value="#3b82f6">
+
+
+            <button type="submit">Enregistrer</button>
+
+            <button type="button" id="btn-cancel-form">Annuler</button>
+
+        </form>
+    </div>
+
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Couleur</th>
+            </tr>
+        </thead>
+        <tbody id="table-categories-body">
+            
+        </tbody>
+    </table>
+
+
+
+    <script src="js/main.js"></script>
+</body>
+</html>
