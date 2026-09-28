@@ -1,6 +1,8 @@
 
 const API_URL = 'https://jsonplaceholder.typicode.com/posts';
 
+let ligneEnEdition = null;
+
 document.addEventListener('DOMContentLoaded', () => {
 
 
@@ -9,6 +11,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnCancelForm = document.querySelector('#btn-cancel-form');
     const sectionForm = document.querySelector('#section-form');
     const formCategorie = document.querySelector('#form-categorie');
+
+    const catId = document.querySelector('#cat-id');
+    const catNom = document.querySelector('#cat-nom');
+    const catCouleur = document.querySelector('#cat-couleur');
+    const catIcone = document.querySelector('#cat-icone');
     const tableBody = document.querySelector('#table-categories-body');
 
 
@@ -35,6 +42,26 @@ document.addEventListener('DOMContentLoaded', () => {
                     `;
                     tableBody.insertAdjacentHTML('beforeend', row);
                 });
+
+
+                document.querySelectorAll('.btn-delete').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const id = button.getAttribute('data-id');
+
+
+                        fetch(`${API_URL}/${id}`, {
+                            method: 'DELETE'
+                        })
+
+                        .then(response => response.json())
+                        .then(() => {
+                            console.log(`Delete : ${id} is  Successfully`);  
+                            chargerCategories();          
+                        })
+                        .catch(error => console.error('Error DELETE : ', error));
+                    });
+                });
+
             })
 
             .catch(error => console.error('Error :', error));
@@ -56,6 +83,39 @@ document.addEventListener('DOMContentLoaded', () => {
         btnShowForm.hidden = false;
         formCategorie.reset();
     });
+
+
+    formCategorie.addEventListener('submit', (event) => {
+
+        event.preventDefault();
+
+        const nouvelleCategorie = {
+            title: catNom.value,
+            couleur: catCouleur.value
+        };
+
+        fetch(API_URL, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(nouvelleCategorie)
+        })
+
+        .then(response => response.json ())
+        .then(data => {
+            console.log('Successfully :', data.id);
+
+
+            formCategorie.reset();
+            sectionForm.hidden = true;
+            btnShowForm.hidden = false;
+
+
+            chargerCategories();
+            
+        })
+        .catch(error => console.error('Error POST :', error));
+        
+    })
 
     
 });
