@@ -1,123 +1,140 @@
+const API_URL = "../backend/api.php";
 
-const API_URL = 'https://jsonplaceholder.typicode.com/posts';
-
+let categories = [];
 let ligneEnEdition = null;
 
-document.addEventListener('DOMContentLoaded', () => {
+
+function chargerCategories() {
+
+    fetch(API_URL)
+
+        .then(response => response.json())
+
+        .then(result => {
+
+            categories = result;
+
+            document.querySelector("#tableBody").innerHTML = "";
+
+            result.forEach(elt => {
+
+                document.querySelector("#tableBody").insertAdjacentHTML(
+                    "beforeend",
+                    `
+                    <tr>
+                        <td>${elt.id}</td>
+                        <td>${elt.nom}</td>
+                        <td>${elt.couleur}</td>
+                        <td>${elt.icone}</td>
+                        <td>
+                            <button type="button" onclick="modifierCategorie(${elt.id})">
+                                Modifier
+                            </button>
+                            <button type="button" onclick="deleteCategorie(${elt.id})">
+                                Supprimer
+                            </button>
+                        </td>
+                    </tr>
+                    `
+                );
+
+            });
+
+        })
+
+        .catch(error => console.error("error :", error));
+}
 
 
+function modifierCategorie(id) {
 
-    const btnShowForm = document.querySelector('#btn-show-form');
-    const btnCancelForm = document.querySelector('#btn-cancel-form');
-    const sectionForm = document.querySelector('#section-form');
-    const formCategorie = document.querySelector('#form-categorie');
+    const categorie = categories.find(elt => elt.id == id);
 
-    const catId = document.querySelector('#cat-id');
-    const catNom = document.querySelector('#cat-nom');
-    const catCouleur = document.querySelector('#cat-couleur');
-    const catIcone = document.querySelector('#cat-icone');
-    const tableBody = document.querySelector('#table-categories-body');
+    if (categorie) {
 
+        ligneEnEdition = categorie;
 
-    function chargerCategories() {
-
-        fetch(API_URL)
-            .then(response => response.json())
-            .then(data => {
-
-                tableBody.innerHTML = '';
-
-                data.slice(0, 5).forEach(cat => {
-
-                    const row = `
-                                                
-                        <tr>
-                            <td>${cat.id}</td>
-                            <td>${cat.title.substring(0, 10)}</td>
-                            <td>Bleu</td>
-                            <td>
-                                <button class="btn-delete" data-id="${cat.id}">Supprimer</button>
-                            </td>
-                        </tr>
-                    `;
-                    tableBody.insertAdjacentHTML('beforeend', row);
-                });
-
-
-                document.querySelectorAll('.btn-delete').forEach(button => {
-                    button.addEventListener('click', () => {
-                        const id = button.getAttribute('data-id');
-
-
-                        fetch(`${API_URL}/${id}`, {
-                            method: 'DELETE'
-                        })
-
-                        .then(response => response.json())
-                        .then(() => {
-                            console.log(`Delete : ${id} is  Successfully`);  
-                            chargerCategories();          
-                        })
-                        .catch(error => console.error('Error DELETE : ', error));
-                    });
-                });
-
-            })
-
-            .catch(error => console.error('Error :', error));
-        
+        document.querySelector("#cat-nom").value = categorie.nom;
+        document.querySelector("#cat-couleur").value = categorie.couleur;
+        document.querySelector("#cat-icone").value = categorie.icone;
     }
-    chargerCategories();
+}
+
+function deleteCategorie(id){
+    const categorie = categories.find(elt => elt.id == id)
+    fetch(API_URL,{
+        method: "DELETE",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify(categorie)
+    })
+}
 
 
-    btnShowForm.addEventListener('click', () => {
-        btnShowForm.hidden = true;
-        sectionForm.hidden = false;
-    });
+document.querySelector("#section-form").addEventListener("submit", event => {
+
+    event.preventDefault();
+
+    const nom = document.querySelector("#cat-nom").value;
+    const couleur = document.querySelector("#cat-couleur").value;
+    const icone = document.querySelector("#cat-icone").value;
+
+    const catg = {
+        nom: nom,
+        couleur: couleur,
+        icone: icone
+    };
 
 
+    let method = "POST";
+
+    if (ligneEnEdition !== null) {
+
+        catg.id = ligneEnEdition.id;
+
+        method = "PUT";
+    }
 
 
-    btnCancelForm.addEventListener('click', () => {
-        sectionForm.hidden = true;
-        btnShowForm.hidden = false;
-        formCategorie.reset();
-    });
+    fetch(API_URL, {
 
+        method: method,
 
-    formCategorie.addEventListener('submit', (event) => {
+        headers: {
+            "Content-Type": "application/json"
+        },
 
-        event.preventDefault();
+        body: JSON.stringify(catg)
 
-        const nouvelleCategorie = {
-            title: catNom.value,
-            couleur: catCouleur.value
-        };
+    }).then(response => response.json())
+    .then(result => 
+        chargerCategories()
+    )
 
-        fetch(API_URL, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(nouvelleCategorie)
-        })
+    .then(response => response.json())
 
-        .then(response => response.json ())
-        .then(data => {
-            console.log('Successfully :', data.id);
+    .then(result => {
 
+        console.log(result);
 
-            formCategorie.reset();
-            sectionForm.hidden = true;
-            btnShowForm.hidden = false;
+        document.querySelector("#section-form").reset();
 
+        ligneEnEdition = null;
 
-            chargerCategories();
-            
-        })
-        .catch(error => console.error('Error POST :', error));
-        
+        chargerCategories();
+
     })
 
-    
+    .catch(error => console.error("error :", error));
+
 });
 
 
+document.addEventListener("DOMContentLoaded", () => {
+
+    chargerCategories();
+
+});
