@@ -1,0 +1,30 @@
+flowchart LR
+
+    A["Cadrer<br><br>Gérer les catégories"]
+    
+    B["Concevoir<br><br>Créer le MCD<br>Préparer le modèle de données"]
+    
+    C["Développer<br><br>Créer la base de données<br>Créer l'API (CRUD)<br>Construire le formulaire HTML<br>Connecter le formulaire à l'API"]
+    
+    D["Tester<br><br>Tester le CRUD<br>Vérifier les opérations"]
+    
+    E["Valider<br><br>Vérifier la conformité<br>Fonctionnalité acceptée"]
+
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+
+    D -->|"Anomalie ?"| C
+
+    classDef cadrer fill:#e0f0ff,stroke:#2196f3,stroke-width:2px,color:#111;
+    classDef concevoir fill:#fff0d9,stroke:#ff9800,stroke-width:2px,color:#111;
+    classDef developper fill:#fce4ec,stroke:#e91e63,stroke-width:2px,color:#111;
+    classDef tester fill:#f3e5f5,stroke:#9c27b0,stroke-width:2px,color:#111;
+    classDef valider fill:#e8f5e9,stroke:#4caf50,stroke-width:2px,color:#111;
+
+    class A cadrer;
+    class B concevoir;
+    class C developper;
+    class D tester;
+    class E valider;
