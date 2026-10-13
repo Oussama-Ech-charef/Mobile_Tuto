@@ -34,6 +34,6 @@ classDiagram
 
 
 
-User "1" --> "0..1" Auteur: is
-Auteur "1..*" --> "0..*" Article: write 
-Article "0..*" --> "1" Categorie: belongs to
+User "1" -- "0..1" Auteur : a pour profil
+Auteur "1" -- "0..*" Article : rédige
+Categorie "1" -- "0..*" Article : contient
