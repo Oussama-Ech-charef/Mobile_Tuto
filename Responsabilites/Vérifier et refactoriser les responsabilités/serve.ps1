@@ -1,0 +1,1 @@
+php -S localhost:8000 -d display_errors=1 -d error_reporting=E_ALL
