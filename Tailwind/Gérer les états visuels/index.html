@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Gestion des catégories</title>
+</head>
+<body>
+    <div class="flex flex-col md:flex-row min-h-screen">
+        <aside class="hidden md:block w-64">
+            <nav class="bg-gray-800 text-white h-full p-4">
+                <ul>
+                    <li class="mb-2"><a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded">Article</a></li>
+                    <li><a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded">Categories</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="flex-1 p-6">
+            <div id="toast_container" class="fixed right-4 top-4 z-50 space-y-2" aria-live="polite"></div>
+            <h1 class="text-xl font-bold">Ajouter une catégorie</h1>
+            <form method="POST" id="form" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 bg-gray-100 p-4 rounded-lg">
+                <label class="flex flex-col gap-1" for="nom">
+                    <span class="font-medium text-gray-700">Nom de la catégorie</span>
+                    <input class="rounded border border-gray-300 bg-white px-3 py-2 text-gray-900 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" name="nom" id="nom" placeholder="Ex. Développement web" required maxlength="100">
+                </label>
+                <label class="flex flex-col gap-1 md:col-span-2" for="description">
+                    <span class="font-medium text-gray-700">Description</span>
+                    <textarea class="rounded border border-gray-300 bg-white px-3 py-2 text-gray-900 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" name="description" id="description" placeholder="Décrivez la catégorie" rows="3" maxlength="500"></textarea>
+                </label>
+                <button type="submit" id="button" class="inline-flex items-center justify-center gap-2 rounded bg-blue-500 px-4 py-2 font-bold text-white transition duration-200 ease-in-out hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-75">
+                    <svg id="spinner" class="hidden h-4 w-4 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                    </svg>
+                    <span id="button-label">Enregistrer</span>
+                </button>
+            </form>
+            <div class="overflow-x-auto">
+                <table class="min-w-full overflow-hidden rounded-lg border border-gray-200 bg-white">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th scope="col" class="border-b px-4 py-3 text-left text-sm font-semibold text-gray-700">Nom</th>
+                            <th scope="col" class="border-b px-4 py-3 text-left text-sm font-semibold text-gray-700">Description</th>
+                            <th scope="col" class="border-b px-4 py-3 text-left text-sm font-semibold text-gray-700">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body" class="divide-y divide-gray-200">
+                        <tr>
+                            <td colspan="3" class="px-4 py-6 text-center text-gray-500">Aucune catégorie disponible.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>

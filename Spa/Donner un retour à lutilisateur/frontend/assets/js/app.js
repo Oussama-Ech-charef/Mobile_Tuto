@@ -66,7 +66,7 @@ formcat.addEventListener('submit', (e) => {
             setLoadingState(false);
             showToast(toastMessage, toastType);
 
-        }, 1000)
+        }, 1500);
     });
 
 });
