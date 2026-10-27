@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="flex flex-col md:flex-row min-h-screen">
+        <aside class="hidden md:block w-64">
+            <nav class="bg-gray-800 text-white h-full p-4">
+                <ul>
+                    <li class="mb-2"><a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded">Article</a></li>
+                    <li><a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded">Categories</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="flex-1 p-6">
+            <h1 class="text-xl font-bold">Ajouter une categorie</h1>
+            <form method="POST" id="form" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 bg-gray-100 p-4 rounded-lg">
+                <input class="bg-gray-100 text-white border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" name="nom" id="nom" placeholder="Nom de la catégorie">
+                <input class="bg-gray-100 text-white border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 " type="color" name="couleur" id="couleur" placeholder="Couleur">
+                <input class="bg-gray-100 text-white border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" name="icone" id="icone" placeholder="Icone">
+                <button type="submit" id="button" class="bg-blue-500 hover:bg-blue-700 transition duration-200 text-white font-bold py-2 px-4 rounded ">Enregistrer</button>
+            </form>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white border border-gray-200">
+                    <thead>
+                        <tr>
+                            <th class="py-2 px-4 border-b">Nom</th>
+                            <th class="py-2 px-4 border-b">Couleur</th>
+                            <th class="py-2 px-4 border-b">Icone</th>
+                            <th class="py-2 px-4 border-b">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
